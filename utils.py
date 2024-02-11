@@ -50,6 +50,11 @@ def save_checkpoint(filepath, obj):
 
 
 def scan_checkpoint(cp_dir, prefix):
+    model_path = os.path.join(cp_dir, f'{prefix}hifigan')
+    if os.path.exists(model_path):
+        print(f'found {model_path}')
+        return model_path
+        
     pattern = os.path.join(cp_dir, prefix + '????????')
     cp_list = glob.glob(pattern)
     if len(cp_list) == 0:
