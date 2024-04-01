@@ -72,17 +72,17 @@ def mel_spectrogram(y, n_fft, num_mels, sampling_rate, hop_size, win_size, fmin,
 
 def check_duration(line: str):
     if len(line) > 0:
-        duration = float(line.split('|')[4])
+        duration = float(line.split('|')[2])
         return duration >=0.5 and duration <= 10.2
     return 0
 
 def get_dataset_filelist(a):
     with open(a.input_training_file, 'r', encoding='utf-8') as fi:
-        training_files = [os.path.join(a.input_wavs_dir, x.split('|')[0] + '.wav')
+        training_files = [os.path.join(a.input_wavs_dir, x.split('|')[0])
                           for x in fi.read().split('\n') if check_duration(x)]
 
     with open(a.input_validation_file, 'r', encoding='utf-8') as fi:
-        validation_files = [os.path.join(a.input_wavs_dir, x.split('|')[0] + '.wav')
+        validation_files = [os.path.join(a.input_wavs_dir, x.split('|')[0])
                             for x in fi.read().split('\n') if check_duration(x)]
     return training_files, validation_files
 
